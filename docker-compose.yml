@@ -1,0 +1,28 @@
+version: '3.7'
+
+networks:
+  docnet:
+    name: outdocks
+    external: true
+
+services:
+  odoo11:
+    image: odoo:11
+    restart: always
+    ports:
+      - $ODOO_PORT:8069
+    tty: true
+    container_name: odoo11
+    command: $COMMAND
+    environment:
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      POSTGRES_USER: $POSTGRES_USER
+      DB_PORT_5432_TCP_ADDR: $DB_PORT_5432_TCP_ADDR
+      DB_PORT_5432_TCP_PORT: $DB_PORT_5432_TCP_PORT
+
+    volumes:
+      - ./o_addons:/mnt/extra-addons
+      - ./o_etc:/etc/odoo
+    networks:
+      docnet:
+        ipv4_address: 172.30.10.50
