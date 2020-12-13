@@ -1,2 +1,3 @@
 o_etc/odoo-server.log
+o_etc/odoo.conf
 .env
